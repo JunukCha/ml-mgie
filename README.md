@@ -33,13 +33,14 @@ pip install -e .
 pip install -U https://download.pytorch.org/whl/cu113/torch-1.12.0%2Bcu113-cp310-cp310-linux_x86_64.whl https://download.pytorch.org/whl/cu113/torchvision-0.13.0%2Bcu113-cp310-cp310-linux_x86_64.whl https://download.pytorch.org/whl/cu113/torchaudio-0.12.0%2Bcu113-cp310-cp310-linux_x86_64.whl
 pip install -U ninja flash-attn==1.0.2
 pip install -U pydrive2 gdown wget
-### _ckpt/LLaVA-7B-v1
+
+# _ckpt/LLaVA-7B-v1
 python3 -m llava.model.apply_delta \
     --base huggyllama/llama-7b \
     --target _ckpt/LLaVA-7B-v1 \
     --delta liuhaotian/LLaVA-Lightning-7B-delta-v1-1
 
-### Before run it, you should create _ckpt/LLaVA-7B-v1.
+# Before run it, you should create _ckpt/LLaVA-7B-v1.
 cd ..
 cp mgie_llava.py LLaVA/llava/model/llava.py
 cp mgie_train.py LLaVA/llava/train/train.py
