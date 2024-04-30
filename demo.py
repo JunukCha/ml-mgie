@@ -121,8 +121,8 @@ def main():
 
         results_folder = f"results/{i:03d}"
         os.makedirs(results_folder, exist_ok=True)
-        img_x = img_x[0]
-        img_y = img_y[0]
+        img_x = Image.fromarray(img_x[0].cpu().numpy())
+        img_y = Image.fromarray(img_y[0].cpu().numpy())
         img_x.save(os.path.join(results_folder, "input.jpg"))
         img_y.save(os.path.join(results_folder, "target.jpg"))
         res.save(os.path.join(results_folder, "pred.jpg"))
