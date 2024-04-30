@@ -22,3 +22,6 @@ python3 -m llava.model.apply_delta \
     --delta liuhaotian/LLaVA-Lightning-7B-delta-v1-1
 
 cd ..
+
+cp mgie_llava.py LLaVA/llava/model/llava.py
+cp mgie_train.py LLaVA/llava/train/train.py
