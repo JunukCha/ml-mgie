@@ -108,3 +108,6 @@ def main():
         save_image(img_x[0], os.path.join(results_folder, "input.jpg"))
         save_image(img_y[0], os.path.join(results_folder, "target.jpg"))
         save_image(res, os.path.join(results_folder, "pred.jpg"))
+
+if __name__ == "__main__":
+    main()
