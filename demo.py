@@ -101,7 +101,7 @@ def main():
 
             out = remove_alter(tokenizer.decode(out))
             emb = model.edit_head(hid.unsqueeze(dim=0), EMB)
-            res = pipe(image=Image.open('_input/%d.jpg'%(i)).convert('RGB'), prompt_embeds=emb, negative_prompt_embeds=NULL, generator=T.Generator(device='cuda').manual_seed(SEED)).images[0]
+            res = pipe(image=img_x, prompt_embeds=emb, negative_prompt_embeds=NULL, generator=T.Generator(device='cuda').manual_seed(SEED)).images[0]
 
         results_folder = f"results/{i:03d}"
         os.makedirs(results_folder, exist_ok=True)
