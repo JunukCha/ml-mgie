@@ -80,6 +80,7 @@ def main():
     
     for i, data in tqdm(enumerate(dataloader), total=len(dataloader)):
         img_x, img_y, txt = data
+        txt = txt[0]
         
         img = image_processor.preprocess(img_x, return_tensors='pt')['pixel_values'][0]
         txt = "what will this image be like if '%s'"%(txt)
