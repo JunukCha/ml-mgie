@@ -12,6 +12,7 @@ from torchvision.utils import save_image
 from CustomDataset import CustomDataset
 from llava.conversation import conv_templates
 from llava.model import *
+import numpy as np
 
 
 def concatenate_horizontally_pil(images, padding_size=0, padding_color=(255, 255, 255)):
@@ -121,8 +122,8 @@ def main():
 
         results_folder = f"results/{i:03d}"
         os.makedirs(results_folder, exist_ok=True)
-        img_x = Image.fromarray(img_x[0].permute(1, 2, 0).cpu().numpy())
-        img_y = Image.fromarray(img_y[0].permute(1, 2, 0).cpu().numpy())
+        img_x = Image.fromarray((img_x[0].permute(1, 2, 0).cpu().numpy()*255).astype(np.uint8))
+        img_y = Image.fromarray((img_y[0].permute(1, 2, 0).cpu().numpy()*255).astype(np.uint8))
         img_x.save(os.path.join(results_folder, "input.jpg"))
         img_y.save(os.path.join(results_folder, "target.jpg"))
         res.save(os.path.join(results_folder, "pred.jpg"))
