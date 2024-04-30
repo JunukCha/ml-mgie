@@ -6,7 +6,7 @@ from PIL import Image
 
 import torch as T
 import transformers, diffusers
-from torch.data.utils import DataLoader
+from torch.utils.data import DataLoader
 from torchvision.utils import save_image
 
 from CustomDataset import CustomDataset
