@@ -14,6 +14,21 @@ from llava.conversation import conv_templates
 from llava.model import *
 
 
+def concatenate_horizontally_pil(images, padding_size=0, padding_color=(255, 255, 255)):
+    widths, heights = zip(*(i.size for i in images))
+
+    total_width = sum(widths) + padding_size * (len(images) - 1)
+    max_height = max(heights)
+
+    new_img = Image.new("RGB", (total_width, max_height), color=padding_color)
+
+    x_offset = 0
+    for img in images:
+        new_img.paste(img, (x_offset, 0))
+        x_offset += img.width + padding_size
+    
+    return new_img
+
 def crop_resize(f, sz=512):
     w, h = f.size
     if w>h:
@@ -106,9 +121,15 @@ def main():
 
         results_folder = f"results/{i:03d}"
         os.makedirs(results_folder, exist_ok=True)
-        save_image(img_x[0], os.path.join(results_folder, "input.jpg"))
-        save_image(img_y[0], os.path.join(results_folder, "target.jpg"))
+        img_x = img_x[0]
+        img_y = img_y[0]
+        img_x.save(os.path.join(results_folder, "input.jpg"))
+        img_y.save(os.path.join(results_folder, "target.jpg"))
         res.save(os.path.join(results_folder, "pred.jpg"))
+        
+        concatenated_image = concatenate_horizontally_pil([img_x, res], padding_size=10)
+        concatenated_image.save(os.path.join(results_folder, "concatenated_image.jpg"))
+        
 
 if __name__ == "__main__":
     main()
