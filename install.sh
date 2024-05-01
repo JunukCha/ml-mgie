@@ -22,5 +22,5 @@ pip install -U pydrive2 gdown wget
 
 cd ..
 
-cp mgie_llava.py LLaVA/llava/model/llava.py
-cp mgie_train.py LLaVA/llava/train/train.py
+# cp mgie_llava.py LLaVA/llava/model/llava.py
+# cp mgie_train.py LLaVA/llava/train/train.py
