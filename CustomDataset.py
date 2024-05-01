@@ -13,7 +13,8 @@ class CustomDataset(Dataset):
     def __init__(self):
         self.source_list = glob.glob("../test/images/source/*.jpg")
         self.target_list = glob.glob("../test/images/target/*.jpg")
-        self.text_list = glob.glob("../test/text/*.txt")
+        # self.text_list = glob.glob("../test/text/*.txt")
+        self.text_list = glob.glob("../../code/demo_output/*/text.txt")
         self.source_list.sort()
         self.target_list.sort()
         self.text_list.sort()
