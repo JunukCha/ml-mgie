@@ -1,8 +1,6 @@
 conda create -n MGLE python=3.10 -y
 conda activate MGLE
 
-pip install torch==2.0.1 torchvision==0.15.2
-
 pip install -U pip cmake cython==0.29.36 pydantic==1.10 numpy
 pip install -U gdown pydrive2 wget jupyter jupyterlab jupyterthemes ipython
 pip install -U sentencepiece transformers diffusers tokenizers datasets gradio==3.37 accelerate evaluate git+https://github.com/openai/CLIP.git
@@ -22,6 +20,8 @@ python3 -m llava.model.apply_delta \
     --delta liuhaotian/LLaVA-Lightning-7B-delta-v1-1
 
 cd ..
+
+pip install torch==2.0.1 torchvision==0.15.2
 
 cp mgie_llava.py LLaVA/llava/model/llava.py
 cp mgie_train.py LLaVA/llava/train/train.py
