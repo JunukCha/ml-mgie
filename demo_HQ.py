@@ -120,7 +120,7 @@ def main():
             emb = model.edit_head(hid.unsqueeze(dim=0), EMB)
             res = pipe(image=img_x, prompt_embeds=emb, negative_prompt_embeds=NULL, generator=T.Generator(device='cuda').manual_seed(SEED)).images[0]
 
-        results_folder = f"results/{i:03d}"
+        results_folder = f"results_HQ/{i:03d}"
         os.makedirs(results_folder, exist_ok=True)
         img_x = Image.fromarray((img_x[0].permute(1, 2, 0).cpu().numpy()*255).astype(np.uint8))
         img_x.save(os.path.join(results_folder, "input.jpg"))
