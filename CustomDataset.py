@@ -57,7 +57,7 @@ class CustomDatasetHQ(Dataset):
         height = int((height * factor) // 64) * 64
         img_x = ImageOps.fit(img_x, (width, height), method=Image.Resampling.LANCZOS)
         
-        image_0 = np.array(img_x.resize((512, 512)))
+        image_0 = np.array(img_x)
         image_0 = torch.FloatTensor(image_0)/255
         image_0 = image_0.permute(2, 0, 1)
         return image_0, prompt
