@@ -95,8 +95,11 @@ def main():
     dataloader = DataLoader(dataset, batch_size=1, shuffle=False)
     
     for i, data in tqdm(enumerate(dataloader), total=len(dataloader)):
+        i = 7
         img_x, txt = data
         txt = txt[0]
+        
+        txt = "Neon light in the city"
         
         img = image_processor.preprocess(img_x, return_tensors='pt')['pixel_values'][0]
         txt = "what will this image be like if '%s'"%(txt)
