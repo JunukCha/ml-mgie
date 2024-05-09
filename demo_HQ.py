@@ -95,8 +95,12 @@ def main():
     dataloader = DataLoader(dataset, batch_size=1, shuffle=False)
     
     for i, data in tqdm(enumerate(dataloader), total=len(dataloader)):
+        if i != 7:
+            continue
         img_x, txt = data
         txt = txt[0]
+        
+        txt = "Neon-lit streets"
         
         img = image_processor.preprocess(img_x, return_tensors='pt')['pixel_values'][0]
         txt = "what will this image be like if '%s'"%(txt)
@@ -128,7 +132,7 @@ def main():
         
         concatenated_image = concatenate_horizontally_pil([img_x, res], padding_size=10)
         concatenated_image.save(os.path.join(results_folder, "concatenated_image.jpg"))
-        
+        break        
 
 if __name__ == "__main__":
     main()

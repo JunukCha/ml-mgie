@@ -55,7 +55,7 @@ class CustomDatasetHQ(Dataset):
         factor = math.ceil(min(width, height) * factor / 64) * 64 / min(width, height)
         width = int((width * factor) // 64) * 64
         height = int((height * factor) // 64) * 64
-        img_x = ImageOps.fit(img_x, (width, height), method=Image.Resampling.LANCZOS)
+        img_x = ImageOps.fit(img_x, (height, height), method=Image.Resampling.LANCZOS)
         
         image_0 = np.array(img_x)
         image_0 = torch.FloatTensor(image_0)/255
