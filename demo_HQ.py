@@ -95,7 +95,8 @@ def main():
     dataloader = DataLoader(dataset, batch_size=1, shuffle=False)
     
     for i, data in tqdm(enumerate(dataloader), total=len(dataloader)):
-        i = 7
+        if i != 7:
+            continue
         img_x, txt = data
         txt = txt[0]
         
