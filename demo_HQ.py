@@ -100,7 +100,7 @@ def main():
         img_x, txt = data
         txt = txt[0]
         
-        txt = "Neon light in the city"
+        txt = "Neon-lit streets"
         
         img = image_processor.preprocess(img_x, return_tensors='pt')['pixel_values'][0]
         txt = "what will this image be like if '%s'"%(txt)
