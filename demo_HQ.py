@@ -131,7 +131,7 @@ def main():
         
         concatenated_image = concatenate_horizontally_pil([img_x, res], padding_size=10)
         concatenated_image.save(os.path.join(results_folder, "concatenated_image.jpg"))
-        
+        break        
 
 if __name__ == "__main__":
     main()
