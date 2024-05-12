@@ -65,7 +65,7 @@ class CustomDatasetHQ(Dataset):
 class CustomDatasetHQ_EVAL(Dataset):
     def __init__(self):
         self.source_list = glob.glob("../../code/eval_output_HQ/*/source.jpg")
-        self.target_list = glob.glob("../../code/eval_output_HQ/*/targe.jpg")
+        self.target_list = glob.glob("../../code/eval_output_HQ/*/target.jpg")
         self.text_list = glob.glob("../../code/eval_output_HQ/*/text.txt")
         self.source_list.sort()
         self.target_list.sort()
