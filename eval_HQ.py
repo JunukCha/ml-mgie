@@ -127,6 +127,10 @@ def main():
 
     SEED = 13331
 
+    num_inference_steps = 25
+    image_guidance_scale = 1.5
+    guidance_scale = 7
+    
     dataset = CustomDatasetHQ_EVAL()
     dataloader = DataLoader(dataset, batch_size=1, shuffle=False)
     
@@ -158,7 +162,14 @@ def main():
 
             out = remove_alter(tokenizer.decode(out))
             emb = model.edit_head(hid.unsqueeze(dim=0), EMB)
-            res = pipe(image=img_x, prompt_embeds=emb, negative_prompt_embeds=NULL, generator=T.Generator(device='cuda').manual_seed(SEED)).images[0]
+            res = pipe(
+                image=img_x, prompt_embeds=emb, 
+                negative_prompt_embeds=NULL, 
+                generator=T.Generator(device='cuda').manual_seed(SEED), 
+                num_inference_steps=num_inference_steps,
+                image_guidance_scale=image_guidance_scale,
+                guidance_scale=guidance_scale,
+            ).images[0]
 
         results_folder = f"eval_outputs_HQ/{i:03d}"
         os.makedirs(results_folder, exist_ok=True)
