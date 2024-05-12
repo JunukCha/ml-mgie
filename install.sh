@@ -25,6 +25,5 @@ cd ..
 # cp mgie_llava.py LLaVA/llava/model/llava.py
 # cp mgie_train.py LLaVA/llava/train/train.py
 
-pip install ssim
 pip install lpips
 pip install scikit-image
