@@ -76,6 +76,7 @@ def crop_resize(f, sz=512):
         f = f.crop([0, p, w, p+w])
     f = f.resize([sz, sz])
     return f
+
 def remove_alter(s):  # hack expressive instruction
     if 'ASSISTANT:' in s: s = s[s.index('ASSISTANT:')+10:].strip()
     if '</s>' in s: s = s[:s.index('</s>')].strip()
@@ -84,7 +85,6 @@ def remove_alter(s):  # hack expressive instruction
     s = '.'.join([s.strip() for s in s.split('.')[:2]])
     if s[-1]!='.': s += '.'
     return s.strip()
-
 
 def main():
     DEFAULT_IMAGE_TOKEN = '<image>'
@@ -127,7 +127,6 @@ def main():
 
     SEED = 13331
 
-    num_inference_steps = 25
     image_guidance_scale = 1.5
     guidance_scale = 7
     
@@ -166,7 +165,7 @@ def main():
                 image=img_x, prompt_embeds=emb, 
                 negative_prompt_embeds=NULL, 
                 generator=T.Generator(device='cuda').manual_seed(SEED), 
-                num_inference_steps=num_inference_steps,
+                # num_inference_steps=num_inference_steps,
                 image_guidance_scale=image_guidance_scale,
                 guidance_scale=guidance_scale,
             ).images[0]
