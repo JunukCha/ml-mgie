@@ -128,7 +128,7 @@ def main():
     SEED = 13331
 
     num_inference_steps = 25
-    image_guidance_scale = 1.5
+    image_guidance_scale = 1.0
     guidance_scale = 7
     
     dataset = CustomDatasetHQ_EVAL()
