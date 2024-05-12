@@ -14,7 +14,7 @@ from llava.conversation import conv_templates
 from llava.model import *
 import numpy as np
 import numpy as np
-import ssim
+
 import lpips
 from torchvision.transforms import ToTensor, Resize, Compose
 from skimage.metrics import structural_similarity as ssim
