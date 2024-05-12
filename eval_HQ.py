@@ -135,6 +135,7 @@ def main():
     lpips_list = []
     for i, data in tqdm(enumerate(dataloader), total=len(dataloader)):
         img_x, target, txt = data
+        target = Image.fromarray(target)
         txt = txt[0]
         
         img = image_processor.preprocess(img_x, return_tensors='pt')['pixel_values'][0]

@@ -90,4 +90,6 @@ class CustomDatasetHQ_EVAL(Dataset):
         image_0 = np.array(img_x)
         image_0 = torch.FloatTensor(image_0)/255
         image_0 = image_0.permute(2, 0, 1)
+        
+        target = np.array(target)
         return image_0, target, prompt
