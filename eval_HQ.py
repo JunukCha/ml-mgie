@@ -136,10 +136,10 @@ def main():
     for i, data in tqdm(enumerate(dataloader), total=len(dataloader)):
         img_x, target, txt = data
         target = Image.fromarray(target.cpu().numpy()[0])
-        txt = txt[0]
+        prompt = txt[0]
         
         img = image_processor.preprocess(img_x, return_tensors='pt')['pixel_values'][0]
-        txt = "what will this image be like if '%s'"%(txt)
+        txt = "what will this image be like if '%s'"%(prompt)
         txt = txt+'\n'+DEFAULT_IM_START_TOKEN+DEFAULT_IMAGE_PATCH_TOKEN*image_token_len+DEFAULT_IM_END_TOKEN
         conv = conv_templates['vicuna_v1_1'].copy()
         conv.append_message(conv.roles[0], txt), conv.append_message(conv.roles[1], None)
@@ -166,6 +166,9 @@ def main():
         img_x.save(os.path.join(results_folder, "input.jpg"))
         res.save(os.path.join(results_folder, "pred.jpg"))
         target.save(os.path.join(results_folder, "target.jpg"))
+        
+        with open(os.path.join(results_folder, "text.txt"), "w") as f:
+            f.write(prompt)
         
         concatenated_image = concatenate_horizontally_pil([img_x, res], padding_size=10)
         concatenated_image.save(os.path.join(results_folder, "concatenated_image.jpg"))
