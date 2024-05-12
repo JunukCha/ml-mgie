@@ -27,3 +27,4 @@ cd ..
 
 pip install ssim
 pip install lpips
+pip install scikit-image
