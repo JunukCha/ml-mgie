@@ -179,7 +179,10 @@ def main():
     print("psnr", np.array(psnr_list).mean())
     print("ssim", np.array(ssim_list).mean())
     print("lpips", np.array(lpips_list).mean())
-        
+    with open("eval_outputs_HQ/evaluate.txt", "w") as f:
+        f.write(f"psnr: {np.array(psnr_list).mean():.4f}\n")
+        f.write(f"ssim: {np.array(ssim_list).mean():.4f}\n")
+        f.write(f"lpips: {np.array(lpips_list).mean():.4f}")
 
 if __name__ == "__main__":
     main()
