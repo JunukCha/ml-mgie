@@ -165,6 +165,7 @@ def main():
         img_x = Image.fromarray((img_x[0].permute(1, 2, 0).cpu().numpy()*255).astype(np.uint8))
         img_x.save(os.path.join(results_folder, "input.jpg"))
         res.save(os.path.join(results_folder, "pred.jpg"))
+        target.save(os.path.join(results_folder, "target.jpg"))
         
         concatenated_image = concatenate_horizontally_pil([img_x, res], padding_size=10)
         concatenated_image.save(os.path.join(results_folder, "concatenated_image.jpg"))
