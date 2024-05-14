@@ -112,10 +112,9 @@ def main():
     
     for text_index in range(len(qualitative_texts)):
         txt = qualitative_texts[text_index]
-        
+        prompt = txt
         for i, data in tqdm(enumerate(dataloader), total=len(dataloader)):
             img_x = data
-            prompt = txt
             
             img = image_processor.preprocess(img_x, return_tensors='pt')['pixel_values'][0]
             txt = "what will this image be like if '%s'"%(prompt)
