@@ -93,3 +93,26 @@ class CustomDatasetHQ_EVAL(Dataset):
         
         target = np.array(target)
         return image_0, target, prompt
+    
+class CustomDatasetHQ_qualitative(Dataset):
+    def __init__(self):
+        self.source_list = glob.glob("../../qualitative/*.jpg")
+        self.source_list.sort()
+
+    def __len__(self):
+        return 5
+
+    def __getitem__(self, i):
+        img_x = Image.open(self.source_list[i])
+        width, height = img_x.size
+        factor = 512 / max(width, height)
+        factor = math.ceil(min(width, height) * factor / 64) * 64 / min(width, height)
+        width = int((width * factor) // 64) * 64
+        height = int((height * factor) // 64) * 64
+        img_x = ImageOps.fit(img_x, (width, height), method=Image.Resampling.LANCZOS)
+        
+        image_0 = np.array(img_x)
+        image_0 = torch.FloatTensor(image_0)/255
+        image_0 = image_0.permute(2, 0, 1)
+        
+        return image_0
