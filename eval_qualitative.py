@@ -114,7 +114,7 @@ def main():
         txt = qualitative_texts[text_index]
         
         for i, data in tqdm(enumerate(dataloader), total=len(dataloader)):
-            img_x, = data
+            img_x = data
             prompt = txt
             
             img = image_processor.preprocess(img_x, return_tensors='pt')['pixel_values'][0]
