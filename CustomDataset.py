@@ -94,6 +94,38 @@ class CustomDatasetHQ_EVAL(Dataset):
         target = np.array(target)
         return image_0, target, prompt
     
+class CustomDatasetHQ10x10_EVAL(Dataset):
+    def __init__(self):
+        self.source_list = glob.glob("../../code/eval_output_HQ10x10_5/*/source.jpg")
+        self.target_list = glob.glob("../../code/eval_output_HQ10x10_5/*/target.jpg")
+        self.text_list = glob.glob("../../code/eval_output_HQ10x10_5/*/text.txt")
+        self.source_list.sort()
+        self.target_list.sort()
+        self.text_list.sort()
+
+    def __len__(self):
+        return 10 # len(self.text_list)
+
+    def __getitem__(self, i):
+        with open(self.text_list[i], "r") as f:
+            prompt = f.read().splitlines()[0]
+        img_x = Image.open(self.source_list[i])
+        target = Image.open(self.target_list[i])
+        width, height = img_x.size
+        factor = 512 / max(width, height)
+        factor = math.ceil(min(width, height) * factor / 64) * 64 / min(width, height)
+        width = int((width * factor) // 64) * 64
+        height = int((height * factor) // 64) * 64
+        img_x = ImageOps.fit(img_x, (width, height), method=Image.Resampling.LANCZOS)
+        target = ImageOps.fit(target, (width, height), method=Image.Resampling.LANCZOS)
+        
+        image_0 = np.array(img_x)
+        image_0 = torch.FloatTensor(image_0)/255
+        image_0 = image_0.permute(2, 0, 1)
+        
+        target = np.array(target)
+        return image_0, target, prompt
+    
 class CustomDatasetHQ_qualitative(Dataset):
     def __init__(self):
         self.source_list = glob.glob("../../qualitative/*.jpg")
