@@ -171,6 +171,7 @@ def main():
             ).images[0]
 
         results_folder = f"eval_outputs_HQ/{i:03d}"
+        print(results_folder)
         os.makedirs(results_folder, exist_ok=True)
         img_x = Image.fromarray((img_x[0].permute(1, 2, 0).cpu().numpy()*255).astype(np.uint8))
         img_x.save(os.path.join(results_folder, "input.jpg"))
