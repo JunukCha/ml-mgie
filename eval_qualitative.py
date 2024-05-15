@@ -104,8 +104,8 @@ def main():
 
     SEED = 13331
 
-    image_guidance_scale = 1.0
-    guidance_scale = 10
+    image_guidance_scale = 1.5
+    guidance_scale = 7.5
     
     dataset = CustomDatasetHQ_qualitative()
     dataloader = DataLoader(dataset, batch_size=1, shuffle=False)
