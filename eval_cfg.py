@@ -174,7 +174,7 @@ def main():
         results_folder = f"eval_outputs_cfg/{i:03d}"
         os.makedirs(results_folder, exist_ok=True)
         img_x = Image.fromarray((img_x[0].permute(1, 2, 0).cpu().numpy()*255).astype(np.uint8))
-        img_x.save(os.path.join(results_folder, "input.jpg"))
+        img_x.save(os.path.join(results_folder, "source.jpg"))
         res.save(os.path.join(results_folder, "pred.jpg"))
         target.save(os.path.join(results_folder, "target.jpg"))
         
