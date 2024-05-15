@@ -136,7 +136,7 @@ class CustomDataset_cfg(Dataset):
         self.text_list.sort()
 
     def __len__(self):
-        return 10 # len(self.text_list)
+        return len(self.text_list)
 
     def __getitem__(self, i):
         with open(self.text_list[i], "r") as f:
