@@ -128,9 +128,9 @@ class CustomDatasetHQ10x10_EVAL(Dataset):
     
 class CustomDataset_cfg(Dataset):
     def __init__(self):
-        self.source_list = glob.glob("../../code/eval_output_cfg/*/source.jpg")
-        self.target_list = glob.glob("../../code/eval_output_cfg/*/target.jpg")
-        self.text_list = glob.glob("../../code/eval_output_cfg/*/text.txt")
+        self.source_list = glob.glob("../../code/eval_output_cfg_5/*/source.jpg")
+        self.target_list = glob.glob("../../code/eval_output_cfg_5/*/target.jpg")
+        self.text_list = glob.glob("../../code/eval_output_cfg_5/*/text.txt")
         self.source_list.sort()
         self.target_list.sort()
         self.text_list.sort()
