@@ -105,13 +105,14 @@ def main():
     SEED = 13331
 
     image_guidance_scale = 1.5
-    guidance_scale = 7
+    guidance_scale = 7.5
     
     dataset = CustomDatasetHQ_qualitative()
     dataloader = DataLoader(dataset, batch_size=1, shuffle=False)
     
     for text_index in range(len(qualitative_texts)):
         txt = qualitative_texts[text_index]
+        txt = "change portrait under the lighting of " + txt
         prompt = txt
         for i, data in tqdm(enumerate(dataloader), total=len(dataloader)):
             img_x = data
@@ -145,7 +146,7 @@ def main():
                     guidance_scale=guidance_scale,
                 ).images[0]
 
-            results_folder = f"eval_outputs_qualiative/{i:03d}"
+            results_folder = f"eval_outputs_qualiative2/{i:03d}"
             os.makedirs(results_folder, exist_ok=True)
             img_x = Image.fromarray((img_x[0].permute(1, 2, 0).cpu().numpy()*255).astype(np.uint8))
             img_x.save(os.path.join(results_folder, "input.jpg"))
