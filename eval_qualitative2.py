@@ -112,7 +112,7 @@ def main():
     
     for i, data in tqdm(enumerate(dataloader), total=len(dataloader)):
         img_x, prompt = data
-        prompt = "change portrait under the lighting of " + prompt
+        prompt = "change portrait under the lighting of " + prompt[0]
         img = image_processor.preprocess(img_x, return_tensors='pt')['pixel_values'][0]
         txt = "what will this image be like if '%s'"%(prompt)
         txt = txt+'\n'+DEFAULT_IM_START_TOKEN+DEFAULT_IMAGE_PATCH_TOKEN*image_token_len+DEFAULT_IM_END_TOKEN
