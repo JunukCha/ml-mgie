@@ -111,6 +111,8 @@ def main():
     dataloader = DataLoader(dataset, batch_size=1, shuffle=False)
     
     for text_index in range(len(qualitative_texts)):
+        if text_index != 1:
+            continue
         txt = qualitative_texts[text_index]
         txt = "change portrait under the lighting of " + txt
         prompt = txt
