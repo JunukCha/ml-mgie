@@ -244,9 +244,9 @@ class CustomDatasetHQ_qualitative(Dataset):
     
 class CustomDatasetHQ_qualitative2(Dataset):
     def __init__(self):
-        self.source_list = glob.glob("../../code/demo_output_qualitative-2/*/source.jpg")
+        self.source_list = glob.glob("../../code/demo_output_qualitative-3/*/source.jpg")
         self.source_list.sort()
-        self.text_list = glob.glob("../../code/demo_output_qualitative-2/*/text.txt")
+        self.text_list = glob.glob("../../code/demo_output_qualitative-3/*/text.txt")
         self.text_list.sort()
 
     def __len__(self):
