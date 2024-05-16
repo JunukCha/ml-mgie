@@ -9,6 +9,58 @@ import math
 import glob
 from torch.utils.data import Dataset
 
+baseline_texts = [
+    "Hot summer weather", 
+    "Sad world of scented candles", 
+    "Fairies in the mountains", 
+    "Fun in the shadows", 
+    "Fragrant breeze", 
+    "Stinging Winter Light", 
+    "Streetlights in a dark street", 
+    "Neon-lit streets", 
+    "A warm spring breeze", 
+    "The light of cold ice", 
+    "Hot campfire", 
+    "A bonfire that has cooled down", 
+    "Lovely candles", 
+    "Colorful Stages", 
+    "Green fluorescent light", 
+    "Lights guarding the castle", 
+    "Fireflies out of nowhere", 
+    "Mysterious Warehouse", 
+    "Delicious clouds in a dream", 
+    "Shimmering pink clouds", 
+    "Red light and green light dance", 
+    "The sweet smell of bread", 
+    "It's about to rain blue", 
+    "Spooky light", 
+    "A dim alleyway", 
+    "Blue light", 
+    "Pink light", 
+    "Green light", 
+    "Yellow light", 
+    "Purple light", 
+    "Cotton candy", 
+    "Rainbow", 
+    "Candy", 
+    "Bread", 
+    "Desert", 
+    "Fire", 
+    "Water", 
+    "Computer", 
+    "Neon", 
+    "Horror", 
+    "Scarry", 
+    "Ghostly whispers", 
+    "Twilight mist", 
+    "Moonlit beach", 
+    "Starry sky", 
+    "Chilly autumn evening", 
+    "Whispering woods", 
+    "Thunderous applause", 
+    "Silent mountains", 
+    "Roaring river", 
+]
 
 class CustomDataset(Dataset):
     def __init__(self):
@@ -24,8 +76,9 @@ class CustomDataset(Dataset):
         return 100 # len(self.text_list)
 
     def __getitem__(self, i):
-        with open(self.text_list[i], "r") as f:
-            prompt = f.read().splitlines()[0]
+        # with open(self.text_list[i], "r") as f:
+        #     prompt = f.read().splitlines()[0]
+        prompt = baseline_texts[i]
         img_x = Image.open(self.source_list[i])
         width, height = img_x.size
         factor = 512 / max(width, height)
