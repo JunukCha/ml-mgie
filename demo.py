@@ -95,8 +95,10 @@ def main():
     dataloader = DataLoader(dataset, batch_size=1, shuffle=False)
     
     for i, data in tqdm(enumerate(dataloader), total=len(dataloader)):
-        img_x, img_y, txt = data
+        # img_x, img_y, txt = data
+        img_x, txt = data
         txt = txt[0]
+        txt = "change portrait under the lighting of " + txt
         
         img = image_processor.preprocess(img_x, return_tensors='pt')['pixel_values'][0]
         txt = "what will this image be like if '%s'"%(txt)
@@ -123,9 +125,9 @@ def main():
         results_folder = f"results/{i:03d}"
         os.makedirs(results_folder, exist_ok=True)
         img_x = Image.fromarray((img_x[0].permute(1, 2, 0).cpu().numpy()*255).astype(np.uint8))
-        img_y = Image.fromarray((img_y[0].permute(1, 2, 0).cpu().numpy()*255).astype(np.uint8))
-        img_x.save(os.path.join(results_folder, "input.jpg"))
-        img_y.save(os.path.join(results_folder, "target.jpg"))
+        # img_y = Image.fromarray((img_y[0].permute(1, 2, 0).cpu().numpy()*255).astype(np.uint8))
+        img_x.save(os.path.join(results_folder, "source.jpg"))
+        # img_y.save(os.path.join(results_folder, "target.jpg"))
         res.save(os.path.join(results_folder, "pred.jpg"))
         
         concatenated_image = concatenate_horizontally_pil([img_x, res], padding_size=10)
