@@ -241,3 +241,30 @@ class CustomDatasetHQ_qualitative(Dataset):
         image_0 = image_0.permute(2, 0, 1)
         
         return image_0
+    
+class CustomDatasetHQ_qualitative2(Dataset):
+    def __init__(self):
+        self.source_list = glob.glob("../../code/demo_output_qualitative-2/*/source.jpg")
+        self.source_list.sort()
+        self.text_list = glob.glob("../../code/demo_output_qualitative-2/*/text.txt")
+        self.text_list.sort()
+
+    def __len__(self):
+        return len(self.source_list)
+
+    def __getitem__(self, i):
+        with open(self.text_list[i], "r") as f:
+            prompt = f.read().splitlines()[0]
+        img_x = Image.open(self.source_list[i])
+        width, height = img_x.size
+        factor = 512 / max(width, height)
+        factor = math.ceil(min(width, height) * factor / 64) * 64 / min(width, height)
+        width = int((width * factor) // 64) * 64
+        height = int((height * factor) // 64) * 64
+        img_x = ImageOps.fit(img_x, (width, height), method=Image.Resampling.LANCZOS)
+        
+        image_0 = np.array(img_x)
+        image_0 = torch.FloatTensor(image_0)/255
+        image_0 = image_0.permute(2, 0, 1)
+        
+        return image_0, prompt
