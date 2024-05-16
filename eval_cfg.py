@@ -140,7 +140,9 @@ def main():
     for i, data in tqdm(enumerate(dataloader), total=len(dataloader)):
         img_x, target, txt = data
         target = Image.fromarray(target.cpu().numpy()[0])
-        prompt = txt[0]
+        txt = "neon signs"
+        txt = "change portrait under the lighting of " + txt
+        prompt = txt # txt[0]
         
         img = image_processor.preprocess(img_x, return_tensors='pt')['pixel_values'][0]
         txt = "what will this image be like if '%s'"%(prompt)
